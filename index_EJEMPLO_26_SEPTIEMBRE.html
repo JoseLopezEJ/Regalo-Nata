@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100019">
+<title>Ejemplo — Nata ya puede abrir su regalo</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}
+body{
+  color:#fff;
+  background:
+    radial-gradient(circle at 20% 15%,rgba(255,0,170,.22),transparent 28%),
+    radial-gradient(circle at 85% 80%,rgba(100,40,255,.24),transparent 30%),
+    linear-gradient(135deg,#090013,#18002b 45%,#08000f);
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;
+  background-image:radial-gradient(#fff 1px,transparent 1px);
+  background-size:38px 38px;
+}
+.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 16px}
+.card{
+  width:min(900px,100%);position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:30px;padding:38px 24px 32px;
+  background:rgba(16,5,27,.78);backdrop-filter:blur(12px);
+  box-shadow:0 25px 80px rgba(0,0,0,.55),0 0 45px rgba(255,0,170,.12);
+  text-align:center;
+}
+.light{position:absolute;width:160px;height:160px;border-radius:50%;filter:blur(45px);opacity:.38;animation:float 7s ease-in-out infinite}
+.l1{background:#ff1493;left:-50px;top:-50px}.l2{background:#7c3cff;right:-60px;bottom:-60px;animation-delay:1.5s}
+@keyframes float{50%{transform:translate(18px,20px) scale(1.12)}}
+.badge{font-size:12px;letter-spacing:3px;color:#ff9bd8;margin-bottom:14px}
+h1{font-size:clamp(32px,7vw,62px);margin:0 0 18px;line-height:1.03}
+.subtitle{font-size:16px;line-height:1.65;color:#ddd;max-width:700px;margin:0 auto}
+.mystery{margin:28px auto;padding:24px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:rgba(255,255,255,.04)}
+.message{font-size:clamp(18px,3vw,24px);line-height:1.55;font-weight:700}
+.teaser{color:#bbb;line-height:1.6;margin:20px auto 0;max-width:650px}
+.candies{font-size:30px;letter-spacing:10px;margin:20px 0;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:680px;margin:25px auto}
+.timebox{padding:18px 8px;border-radius:18px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1)}
+.num{font-size:clamp(28px,6vw,48px);font-weight:800}
+.label{font-size:10px;letter-spacing:2px;color:#aaa;margin-top:5px}
+.hidden{display:none!important}
+.final{margin-top:25px;padding-top:25px;border-top:1px solid rgba(255,255,255,.1)}
+.final h2{font-size:clamp(28px,6vw,45px);margin:0 0 12px}
+.final p{color:#ddd;line-height:1.6}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:54px;padding:0 22px;margin:8px;
+  border-radius:16px;border:0;text-decoration:none;cursor:pointer;
+  font-weight:800;font-size:15px;color:#fff;
+  background:linear-gradient(135deg,#ff2aa6,#7d42ff);
+  box-shadow:0 10px 30px rgba(255,42,166,.2);
+  transition:.2s transform,.2s filter;
+}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn.secondary{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
+.note{font-size:12px;color:#999;margin-top:15px}
+.footer{margin-top:25px;color:#777;font-size:11px}
+@media(max-width:560px){
+  .card{padding:28px 16px}
+  .countdown{gap:7px}.timebox{padding:14px 4px}
+  .btn{width:100%;margin:6px 0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main class="card">
+    <div class="light l1"></div><div class="light l2"></div>
+
+    <div class="badge">??? • PROTOCOLO SECRETO • ???</div>
+    <h1 id="title">Nata… ¿de verdad quieres saber?</h1>
+
+    <div class="candies">🍬 ✨ 🍭 ✨ 🍫 🎀 ✨</div>
+
+    <section class="mystery">
+      <div class="message">
+        Se que tienes curiosidad por saber qué contiene el código QR,
+        recuerda que la gran fecha es el sábado 26 de septiembre 2026,
+        recuerda que tu amigo secreto sabe que eres curiosa 👀
+      </div>
+      <div class="teaser">
+        La pregunta no es qué hay dentro…<br>
+        la pregunta es <b>cuándo puedes abrirlo.</b> ¿?
+      </div>
+    </section>
+
+    <section id="countdownSection">
+      <div class="badge">LA CUENTA REGRESIVA HA COMENZADO</div>
+      <div class="countdown">
+        <div class="timebox"><div class="num" id="days">00</div><div class="label">DÍAS</div></div>
+        <div class="timebox"><div class="num" id="hours">00</div><div class="label">HORAS</div></div>
+        <div class="timebox"><div class="num" id="minutes">00</div><div class="label">MINUTOS</div></div>
+        <div class="timebox"><div class="num" id="seconds">00</div><div class="label">SEGUNDOS</div></div>
+      </div>
+      <div class="note">El misterio se desbloquea el 26 de septiembre de 2026.</div>
+    </section>
+
+    <section id="finalSection" class="final hidden">
+      <h2>Nata… ya llegó el momento. 🎁</h2>
+      <p>
+        Hoy ya no hay cuenta regresiva.<br>
+        <b>26 DE SEPTIEMBRE DE 2026</b><br>
+        La espera terminó. Ahora sí puedes descubrir tu regalo.
+      </p>
+
+      <!-- IMPORTANTE: el PDF debe estar en la misma carpeta que este HTML. -->
+      <a class="btn" href="./Tarjeta_Regalo_Nata.pdf" target="_blank" rel="noopener noreferrer">
+        🎁 Nata ya es hora de abrir tu regalo
+      </a>
+
+      <a class="btn secondary" href="./Tarjeta_Regalo_Nata.pdf" download="Tarjeta_Regalo_Nata.pdf">
+        📥 Descargar mi regalo
+      </a>
+
+      <p class="note">
+        El primer botón abre el PDF original en una nueva pestaña/ventana.
+      </p>
+    </section>
+
+    <div class="footer">Tu amigo secreto sabe que eres curiosa… 🙃</div>
+  </main>
+</div>
+
+<script>
+const TARGET = new Date("2026-09-25T23:59:59");
+
+const countdownSection = document.getElementById("countdownSection");
+const finalSection = document.getElementById("finalSection");
+const title = document.getElementById("title");
+
+function pad(n) { return String(n).padStart(2,"0"); }
+
+function unlock() {
+  countdownSection.classList.add("hidden");
+  finalSection.classList.remove("hidden");
+  title.textContent = "Nata… ya es hora. 🎁";
+  document.title = "Nata, ya es hora 🎁";
+}
+
+function updateCountdown() {
+  const diff = TARGET.getTime() - Date.now();
+
+  if (diff <= 0) {
+    unlock();
+    return;
+  }
+
+  const totalSeconds = Math.floor(diff / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  document.getElementById("days").textContent = pad(days);
+  document.getElementById("hours").textContent = pad(hours);
+  document.getElementById("minutes").textContent = pad(minutes);
+  document.getElementById("seconds").textContent = pad(seconds);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* Sonido misterioso al primer toque/click, respetando las políticas de autoplay. */
+let soundPlayed = false;
+function mysterySound() {
+  if (soundPlayed) return;
+  soundPlayed = true;
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(180, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(520, ctx.currentTime + 0.7);
+    gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.9);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.95);
+  } catch(e) {}
+}
+document.addEventListener("pointerdown", mysterySound, {once:true});
+</script>
+</body>
+</html>
